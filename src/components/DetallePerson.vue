@@ -78,8 +78,9 @@ h1 {
   height: 200px;
   border: 3px solid #4CAF50;
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
 }
 
 .info-persona {
