@@ -2,44 +2,47 @@
   <!-- Contenedor principal de cada persona -->
   <div class="datos-persona">
     
-    <!-- Vista de datos (no editable) -->
-    <div v-if="!editando" class="persona-card">
-      <img :src="datos.foto" :alt="datos.nombre" class="foto-persona">
-      <div class="info">
-        <p><strong>Nombre:</strong> {{ datos.nombre }}</p>
-        <p><strong>Apellidos:</strong> {{ datos.apellidos }}</p>
-        <p><strong>Edad:</strong> {{ datos.edad }} años</p>
-        <button @click="activarEdicion()" class="btn-editar">Editar</button>
-      </div>
-    </div>
-
-    <!-- Vista de edición (formulario) -->
-    <div v-else class="formulario-edicion">
-      <h3>Editar datos de {{ datos.nombre }}</h3>
-      
-      <div class="form-group">
-        <label>Nombre:</label>
-        <input type="text" v-model="personaEditada.nombre">
+    <!-- Transición entre vista de datos y vista de edición -->
+    <Transition name="cambio-vista" mode="out-in">
+      <!-- Vista de datos (no editable) -->
+      <div v-if="!editando" key="vista-datos" class="persona-card">
+        <img :src="datos.foto" :alt="datos.nombre" class="foto-persona">
+        <div class="info">
+          <p><strong>Nombre:</strong> {{ datos.nombre }}</p>
+          <p><strong>Apellidos:</strong> {{ datos.apellidos }}</p>
+          <p><strong>Edad:</strong> {{ datos.edad }} años</p>
+          <button @click="activarEdicion()" class="btn-editar">Editar</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Apellidos:</label>
-        <input type="text" v-model="personaEditada.apellidos">
-      </div>
+      <!-- Vista de edición (formulario) -->
+      <div v-else key="vista-edicion" class="formulario-edicion">
+        <h3>Editar datos de {{ datos.nombre }}</h3>
+        
+        <div class="form-group">
+          <label>Nombre:</label>
+          <input type="text" v-model="personaEditada.nombre">
+        </div>
 
-      <div class="form-group">
-        <label>Edad:</label>
-        <input type="number" v-model.number="personaEditada.edad">
-      </div>
+        <div class="form-group">
+          <label>Apellidos:</label>
+          <input type="text" v-model="personaEditada.apellidos">
+        </div>
 
-      <div class="form-group">
-        <label>URL de la foto:</label>
-        <input type="text" v-model="personaEditada.foto">
-      </div>
+        <div class="form-group">
+          <label>Edad:</label>
+          <input type="number" v-model.number="personaEditada.edad">
+        </div>
 
-      <button @click="guardarCambios()" class="btn-actualizar">Guardar</button>
-      <button @click="cancelarEdicion()" class="btn-cancelar">Cancelar</button>
-    </div>
+        <div class="form-group">
+          <label>URL de la foto:</label>
+          <input type="text" v-model="personaEditada.foto">
+        </div>
+
+        <button @click="guardarCambios()" class="btn-actualizar">Guardar</button>
+        <button @click="cancelarEdicion()" class="btn-cancelar">Cancelar</button>
+      </div>
+    </Transition>
 
   </div>
 </template>
@@ -200,6 +203,27 @@ export default {
 
 .btn-cancelar:hover {
   background-color: #da190b;
+}
+
+/* Transiciones de cambio de vista */
+/* Estados activos durante los periodos de entrada y salida */
+.cambio-vista-enter-active,
+.cambio-vista-leave-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+/* Propiedades del estado inicial de entrada y estado final de salida */
+.cambio-vista-enter-from,
+.cambio-vista-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Propiedades del estado final de entrada y estado inicial de salida */
+.cambio-vista-enter-to,
+.cambio-vista-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Responsive */
