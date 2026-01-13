@@ -7,11 +7,13 @@ Esta tarea implementa una aplicación Vue 3 con sistema de rutas (vue-router) qu
 ## Requisitos Implementados
 
 ### 1. Ruta Raíz (/)
+
 - Muestra un listado con el nombre de cada persona
 - Cada persona tiene un enlace "Ver detalles" que permite acceder a sus datos completos
 - Los datos se cargan desde el estado centralizado
 
 ### 2. Ruta de Detalle (/personas/:id)
+
 - Muestra los datos completos de la persona seleccionada:
   - Nombre
   - Apellidos
@@ -22,6 +24,7 @@ Esta tarea implementa una aplicación Vue 3 con sistema de rutas (vue-router) qu
   - "Editar" - accede al formulario de edición
 
 ### 3. Ruta de Edición (/personas/:id/editar)
+
 - Muestra un formulario para editar los datos de la persona:
   - Nombre
   - Apellidos
@@ -36,7 +39,7 @@ Esta tarea implementa una aplicación Vue 3 con sistema de rutas (vue-router) qu
 
 ### Estructura de Carpetas
 
-```
+```text
 src/
 ├── App.vue                  # Componente raíz con router-view
 ├── main.js                  # Configuración de la aplicación y rutas
@@ -69,16 +72,19 @@ export const datos = reactive({
 ### Componentes
 
 #### Listado.vue
+
 - Carga el estado centralizado
 - Itera sobre el array de personas
 - Proporciona enlaces para acceder a los detalles de cada persona
 
 #### DetallePerson.vue
+
 - Recibe el ID de la persona a través de la ruta
 - Utiliza un computed property para obtener los datos de la persona desde el estado centralizado
 - Muestra todos los datos de la persona con su fotografía
 
 #### EditarPersona.vue
+
 - Recibe el ID de la persona a través de la ruta
 - Utiliza un watcher para detectar cambios en el ID de la ruta (navegación entre diferentes personas)
 - Carga los datos iniciales en el hook `created()`
