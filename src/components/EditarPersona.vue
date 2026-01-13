@@ -30,7 +30,7 @@
 
       <div class="botones">
         <button type="submit" class="btn btn-guardar">Guardar cambios</button>
-        <router-link :to="'/personas/' + id" class="btn btn-cancelar">Cancelar</router-link>
+        <router-link :to="'/personas/' + $route.params.id" class="btn btn-cancelar">Cancelar</router-link>
       </div>
     </form>
   </div>
@@ -48,14 +48,6 @@ import { datos } from '../estado.js'
 export default {
   name: 'EditarPersona',
   
-  // Props recibidas desde la ruta
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
-  },
-  
   data() {
     return {
       datos,
@@ -72,7 +64,7 @@ export default {
   computed: {
     // Calculamos la persona actual basándonos en el ID de la ruta
     persona() {
-      return this.datos.obtenerPersona(parseInt(this.id));
+      return this.datos.obtenerPersona(parseInt(this.$route.params.id));
     }
   },
   
@@ -83,7 +75,7 @@ export default {
   
   // Watchers: observamos cambios en el ID de la ruta
   watch: {
-    id() {
+    '$route.params.id'() {
       this.cargarDatosPersona();
     }
   },
@@ -100,7 +92,7 @@ export default {
     guardarCambios() {
       this.datos.actualizarPersona(this.personaEditada);
       // Redirigimos a la página de detalle de la persona
-      this.$router.push('/personas/' + this.id);
+      this.$router.push('/personas/' + this.$route.params.id);
     }
   }
 }

@@ -12,7 +12,7 @@
         
         <div class="botones">
           <router-link to="/" class="btn btn-volver">Volver al listado</router-link>
-          <router-link :to="'/personas/' + id + '/editar'" class="btn btn-editar">Editar</router-link>
+          <router-link :to="'/personas/' + $route.params.id + '/editar'" class="btn btn-editar">Editar</router-link>
         </div>
       </div>
     </div>
@@ -31,14 +31,6 @@ import { datos } from '../estado.js'
 export default {
   name: 'DetallePerson',
   
-  // Props recibidas desde la ruta
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
-  },
-  
   data() {
     return {
       datos
@@ -48,7 +40,7 @@ export default {
   computed: {
     // Calculamos la persona actual basándonos en el ID de la ruta
     persona() {
-      return this.datos.obtenerPersona(parseInt(this.id));
+      return this.datos.obtenerPersona(parseInt(this.$route.params.id));
     }
   }
 }

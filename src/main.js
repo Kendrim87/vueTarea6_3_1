@@ -10,8 +10,8 @@ import EditarPersona from './components/EditarPersona.vue'
 // Definimos las rutas de la aplicación
 const rutas = [
   { path: '/', component: Listado },
-  { path: '/personas/:id', component: DetallePerson, props: true },
-  { path: '/personas/:id/editar', component: EditarPersona, props: true }
+  { path: '/personas/:id', component: DetallePerson },
+  { path: '/personas/:id/editar', component: EditarPersona }
 ]
 
 // Creamos el router con el array de rutas
